@@ -98,17 +98,19 @@ const updateStatusOfTaskToFile = (payload) => {
   });
 };
 
-const listAllTasks = () => {
+const listAllTasks = (filterBy) => {
   fs.readFile("./tasks.json", "utf-8", (err, data) => {
     if (err) {
       console.log("No data found, Please add a task to view tasks");
     } else {
       let output = JSON.parse(data);
-      output.forEach((task) => {
-        console.log(
-          `ID:${task.id} | Task: ${task.description} | Status:${task.status} | Last updated at:${task.updatedAt}`
-        );
-      });
+      output
+        .filter((task) => (filterBy === "" ? true : task.status === filterBy))
+        .forEach((task) => {
+          console.log(
+            `ID:${task.id} | Task: ${task.description} | Status:${task.status} | Last updated at:${task.updatedAt}`
+          );
+        });
     }
   });
 };

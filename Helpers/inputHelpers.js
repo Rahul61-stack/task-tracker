@@ -40,7 +40,7 @@ const promptUser = (text) => {
         promptUser();
         break;
       case "list":
-        listAllTasks();
+        listAllTasks(params[0] ? params[0] : "");
         promptUser();
         break;
       case "help":
