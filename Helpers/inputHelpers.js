@@ -6,8 +6,8 @@ import {
 import {
   deleteTaskFromFile,
   listAllTasks,
+  updateStatusOfTaskToFile,
 } from "../Services/file_services/service.js";
-import { statusMap } from "../Constants.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -32,24 +32,11 @@ const promptUser = (text) => {
         promptUser();
         break;
       case "update":
-        // try {
-        //   handleUpdateTask(params);
-        // } catch (err) {
-        //   console.log(err);
-        //   promptUser();
-        // }
         handleUpdateTask(params);
         promptUser();
         break;
       case "mark":
-        console.log(
-          "\nPlease select the new status for your selected task, \n1. To-do\n2. In progress\n3. Done"
-        );
-        let id = params[0];
-        rl.question("", (answer) => {
-          let newStatus = statusMap[+answer];
-          //updateStatusOfTaskToFile
-        });
+        updateStatusOfTaskToFile({ id: params[0], status: params[1] });
         promptUser();
         break;
       case "list":

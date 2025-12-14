@@ -60,13 +60,39 @@ const deleteTaskFromFile = (id) => {
       );
     } else {
       let tasks = JSON.parse(data);
-      console.log(tasks, id, "REHUL");
       let updatedTasks = tasks.filter((data) => data.id != +id);
       fs.writeFile("./tasks.json", JSON.stringify(updatedTasks), (err) => {
         if (err) {
           console.log(err);
         }
         console.log("Task deleted successfully!");
+      });
+    }
+  });
+};
+
+const updateStatusOfTaskToFile = (payload) => {
+  fs.readFile("./tasks.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log(
+        "File does not exists yet, Please add a task to update existing ones"
+      );
+    } else {
+      let tasks = JSON.parse(data);
+      let updatedTasks = tasks.map((task) => {
+        if (task.id === +payload.id) {
+          return {
+            ...task,
+            status: payload.status,
+            updatedAt: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
+          };
+        } else return task;
+      });
+      fs.writeFile("./tasks.json", JSON.stringify(updatedTasks), (err) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log("Task status updated successfully!");
       });
     }
   });
@@ -79,9 +105,17 @@ const listAllTasks = () => {
     } else {
       let output = JSON.parse(data);
       output.forEach((task) => {
-        console.log(task.description);
+        console.log(
+          `ID:${task.id} | Task: ${task.description} | Status:${task.status} | Last updated at:${task.updatedAt}`
+        );
       });
     }
   });
 };
-export { addTaskToFile, listAllTasks, updateTaskToFile, deleteTaskFromFile };
+export {
+  addTaskToFile,
+  listAllTasks,
+  updateTaskToFile,
+  deleteTaskFromFile,
+  updateStatusOfTaskToFile,
+};
