@@ -1,7 +1,4 @@
-import {
-  addTaskToFile,
-  updateTaskToFile,
-} from "../file_services/fileService.js";
+import { addTaskToFile, updateTaskToFile } from "../file_services/service.js";
 
 const handleAddTask = (taskName) => {
   let payload = {

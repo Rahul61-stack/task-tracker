@@ -1,16 +1,20 @@
 import readline from "readline";
-import { handleAddTask, handleUpdateTask } from "./services.js";
+import {
+  handleAddTask,
+  handleUpdateTask,
+} from "../Services/input_services/service.js";
 import {
   deleteTaskFromFile,
   listAllTasks,
-} from "../file_services/fileService.js";
+} from "../Services/file_services/service.js";
+import { statusMap } from "../Constants.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const promptUser = () => {
+const promptUser = (text) => {
   rl.question("", (answer) => {
     let command = answer.split(" ")[0];
     let params = answer.split(" ").filter((val, i) => i !== 0);
@@ -18,13 +22,14 @@ const promptUser = () => {
       case "add":
         try {
           handleAddTask(params.join(" "));
+          promptUser();
         } catch (err) {
           console.log(err);
-          promptUser();
         }
         break;
       case "delete":
-        deleteTaskFromFile(params[1]);
+        deleteTaskFromFile(params[0]);
+        promptUser();
         break;
       case "update":
         // try {
@@ -37,6 +42,15 @@ const promptUser = () => {
         promptUser();
         break;
       case "mark":
+        console.log(
+          "\nPlease select the new status for your selected task, \n1. To-do\n2. In progress\n3. Done"
+        );
+        let id = params[0];
+        rl.question("", (answer) => {
+          let newStatus = statusMap[+answer];
+          //updateStatusOfTaskToFile
+        });
+        promptUser();
         break;
       case "list":
         listAllTasks();

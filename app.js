@@ -1,7 +1,4 @@
-import {
-  initialiseTaskTracker,
-  onClose,
-} from "./input_services/inputService.js";
+import { initialiseTaskTracker, onClose } from "./Helpers/inputHelpers.js";
 
 initialiseTaskTracker();
 onClose();

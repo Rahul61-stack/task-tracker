@@ -60,12 +60,13 @@ const deleteTaskFromFile = (id) => {
       );
     } else {
       let tasks = JSON.parse(data);
-      let updatedTasks = tasks.filter((data) => data.id != id);
+      console.log(tasks, id, "REHUL");
+      let updatedTasks = tasks.filter((data) => data.id != +id);
       fs.writeFile("./tasks.json", JSON.stringify(updatedTasks), (err) => {
         if (err) {
           console.log(err);
         }
-        console.log("Task updated successfully!");
+        console.log("Task deleted successfully!");
       });
     }
   });
