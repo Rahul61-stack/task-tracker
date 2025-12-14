@@ -1,30 +1,39 @@
-ASSESMENT URL: https://roadmap.sh/projects/task-tracker
+# Task Tracker CLI
 
-# Task Tracker
+A simple command-line interface (CLI) application for managing your tasks built with Node.js.
 
-File:
-Whenever we add a new task, we first check if the JSON file is already created, possible cases:
+## Features
 
-1. No file present: We create a new file and add the new task here
-2. File already exists, update to the current file
+- Add new tasks
+- Update existing tasks
+- Delete tasks
+- Mark tasks with different statuses
+- List all tasks
+- Persistent storage using JSON
 
-Operations:
+## Prerequisites
 
-Add: Add a new task to the JSON File.
-Possible edge cases:
-Can we add an exisiting task twice? -> Add a confirmation message and ask if they want to create the duplicate task, or delete the old task
+Before running this application, make sure you have the following installed:
 
-Delete: Straight forward, delete the exisiting task by id
-Error cases:
-If ID does not exist, show an error msg to mention this id does not exist
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- npm (comes with Node.js)
 
-Update: Straight forward, update the exisiting task by id
-Error cases:
-If ID does not exist, show an error msg to mention this id does not exist
+## Installation
 
-Mark Tasks -> can update status, lets give user options here to select from (In progress, done)
+1. Clone the repository:
 
-List tasks,
+```bash
+git clone
+cd task-tracker
+```
 
-List tasks by status
-Done, not done, in progress
+2. Install dependencies:
+
+```bash
+npm install
+
+### Starting the Application
+
+Run the application using:
+npm start
+```
